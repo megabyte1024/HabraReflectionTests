@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastReslectionForHabrahabr", "FastReslectionForHabrahabr\FastReslectionForHabrahabr.csproj", "{90FBD2C4-F700-4DE7-AF36-70E2BBB0B517}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionTests", "ReflectionTests\ReflectionTests.csproj", "{53C51488-3E89-4745-9497-29C5E0D008CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90FBD2C4-F700-4DE7-AF36-70E2BBB0B517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90FBD2C4-F700-4DE7-AF36-70E2BBB0B517}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90FBD2C4-F700-4DE7-AF36-70E2BBB0B517}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90FBD2C4-F700-4DE7-AF36-70E2BBB0B517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53C51488-3E89-4745-9497-29C5E0D008CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53C51488-3E89-4745-9497-29C5E0D008CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53C51488-3E89-4745-9497-29C5E0D008CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53C51488-3E89-4745-9497-29C5E0D008CB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D8D1C31-0B41-45D4-83CD-3AAE8DC4F3F2}
+	EndGlobalSection
+EndGlobal
