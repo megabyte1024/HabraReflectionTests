@@ -16,8 +16,6 @@ namespace ReflectionTests
         private readonly IContainer _fastContainer;
         private readonly IContainer _slowContainer;
         private readonly IContainer _manualContainer;
-
-
         public BaseTests()
         {
             var fastBuilder =
@@ -41,7 +39,6 @@ namespace ReflectionTests
                 .RegisterModule<ManualModule>();
             _manualContainer = manualBuilder.Build();
         }
-
         public static IEnumerable<object[]> TestData()
         {
             var rn = Environment.NewLine;
@@ -50,7 +47,6 @@ namespace ReflectionTests
             yield return new object[] { $"ФИО:Иванов Иван Иванович{rn}Телефон:+78886543422{rn}Возраст:22", "Иванов Иван Иванович", "+78886543422", 22 };
             yield return new object[] { $"Фамилия Имя Отчество:Иванов Иван Иванович{rn}Телефон:+78886543422{rn}Полных лет:22", "Иванов Иван Иванович", "+78886543422", 22 };
         }
-
         [Theory]
         [MemberData(nameof(TestData))]
         public async Task ShouldHydrateFast(string data, string etalonFullName, string etalonPhone, int etalonAge)
@@ -62,7 +58,6 @@ namespace ReflectionTests
                 await RoutineTest(etalonFullName, etalonPhone, etalonAge, parseFunc);
             }
         }
-
         [Theory]
         [MemberData(nameof(TestData))]
         public async Task ShouldHydrateFastOpt(string data, string etalonFullName, string etalonPhone, int etalonAge)
@@ -74,7 +69,6 @@ namespace ReflectionTests
                 await RoutineTest(etalonFullName, etalonPhone, etalonAge, parseFunc);
             }
         }
-
         [Theory]
         [MemberData(nameof(TestData))]
         public async Task ShouldHydrateSlow(string data, string etalonFullName, string etalonPhone, int etalonAge)
@@ -97,7 +91,6 @@ namespace ReflectionTests
                 await RoutineTest(etalonFullName, etalonPhone, etalonAge, parseFunc);
             }
         }
-
         [Theory]
         [MemberData(nameof(TestData))]
         public async Task ShouldHydrateManual(string data, string etalonFullName, string etalonPhone, int etalonAge)
@@ -120,7 +113,6 @@ namespace ReflectionTests
                 await RoutineTest(etalonFullName, etalonPhone, etalonAge, parseFunc);
             }
         }
-
         private static async Task RoutineTest(string etalonFullName, string etalonPhone, int etalonAge, Func<Task<Contact>> parseFunc)
         {
             var result = await parseFunc();
