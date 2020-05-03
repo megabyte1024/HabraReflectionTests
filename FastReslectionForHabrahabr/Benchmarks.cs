@@ -17,7 +17,7 @@ namespace FastReslectionForHabrahabr
     [Orderer(BenchmarkDotNet.Order.SummaryOrderPolicy.FastestToSlowest)]
     public class Benchmarks
     {
-        [Params(1, 100, 1000)]
+        [Params(1, 10, 100, 1000)]
         public int N = 1;
 
         public static IEnumerable<string> GetBenchData()

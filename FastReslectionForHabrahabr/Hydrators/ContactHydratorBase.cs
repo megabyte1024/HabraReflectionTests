@@ -17,6 +17,8 @@ namespace FastReslectionForHabrahabr.Hydrators
         private readonly IRawStringParser _normalizer;
         private readonly IStorage _db;
         protected static readonly string _typeName;
+        protected static readonly IEnumerable<ContactMapSchema> _mapSchemas = MockHelper.GetFakeData();
+
         static ContactHydratorBase()
         {
             var type = typeof(Contact);
@@ -39,7 +41,7 @@ namespace FastReslectionForHabrahabr.Hydrators
         {
             var result = new List<PropertyToValueCorrelation>(10);
             var mailPairs = _normalizer.ParseWithoutLinq(rawData: rawData, pairDelimiter: Environment.NewLine);
-            var mapSchemas = await _db.ContactMapSchemas.ToArrayAsync(abort);
+            var mapSchemas = _mapSchemas.ToArray();
             foreach (var item in mapSchemas)
             {
                 if (!item.EntityName.Equals(_typeName, StringComparison.InvariantCultureIgnoreCase))
@@ -61,11 +63,11 @@ namespace FastReslectionForHabrahabr.Hydrators
         private async Task<PropertyToValueCorrelation[]> GetPropertiesValues(string rawData, CancellationToken abort)
         {
             var mailPairs = _normalizer.ParseWithLinq(rawData: rawData, pairDelimiter: Environment.NewLine);
-            var mapSchemas = await
-                _db.ContactMapSchemas
+            var mapSchemas = 
+                _mapSchemas
                 .Where(x => x.EntityName.ToUpperInvariant() == _typeName.ToUpperInvariant())
                 .Select(x => new { x.Key, x.Property })
-                .ToArrayAsync(abort);
+                .ToArray();
 
             return
                 mailPairs

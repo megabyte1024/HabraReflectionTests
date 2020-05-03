@@ -28,7 +28,7 @@ namespace FastReslectionForHabrahabr.Hydrators
             var setterInfo = property.GetSetMethod();
             var paramValueOriginal = Expression.Parameter(property.PropertyType, "value");
             var paramEntity = Expression.Parameter(typeof(Contact), "entity");
-            var setterExp = Expression.Call(paramEntity, setterInfo, paramValueOriginal).Reduce();
+            var setterExp = Expression.Call(paramEntity, setterInfo, paramValueOriginal);
             
             var lambda = (Expression<Action<Contact, string>>)Expression.Lambda(setterExp, paramEntity, paramValueOriginal);
 
