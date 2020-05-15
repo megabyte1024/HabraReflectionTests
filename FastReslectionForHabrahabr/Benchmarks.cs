@@ -33,10 +33,20 @@ namespace FastReslectionForHabrahabr
             yield return $"Фамилия Имя Отчество:Иванов Иван Иванович{rn}Телефон:+78886543422{rn}Полных лет:22";
         }
 
+        IStorage _db;
+
+        [GlobalSetup]
+        public void Setup()
+        {
+            _db = MockHelper.InstanceDb();
+        }
+
+        private IStorage DBInstance => _db;
+
         [Benchmark]
         public async Task FastHydrationLinq()
         {
-            var parser = new FastContactHydrator(new DefaultRawStringParser(), MockHelper.InstanceDb());
+            var parser = new FastContactHydrator(new DefaultRawStringParser(), DBInstance);
             for (int i = 0; i < N; i++)
             {
                 foreach (var data in GetBenchData())
@@ -48,7 +58,7 @@ namespace FastReslectionForHabrahabr
         [Benchmark]
         public async Task FastHydration()
         {
-            var parser = new FastContactHydrator(new DefaultRawStringParser(), MockHelper.InstanceDb());
+            var parser = new FastContactHydrator(new DefaultRawStringParser(), DBInstance);
             for (int i = 0; i < N; i++)
             {
                 foreach (var data in GetBenchData())
@@ -60,7 +70,7 @@ namespace FastReslectionForHabrahabr
         [Benchmark]
         public async Task SlowHydrationLinq()
         {
-            var parser = new SlowContactHydrator(new DefaultRawStringParser(), MockHelper.InstanceDb());
+            var parser = new SlowContactHydrator(new DefaultRawStringParser(), DBInstance);
             for (int i = 0; i < N; i++)
             {
                 foreach (var data in GetBenchData())
@@ -72,7 +82,7 @@ namespace FastReslectionForHabrahabr
         [Benchmark]
         public async Task SlowHydration()
         {
-            var parser = new SlowContactHydrator(new DefaultRawStringParser(), MockHelper.InstanceDb());
+            var parser = new SlowContactHydrator(new DefaultRawStringParser(), DBInstance);
             for (int i = 0; i < N; i++)
             {
                 foreach (var data in GetBenchData())
@@ -84,7 +94,7 @@ namespace FastReslectionForHabrahabr
         [Benchmark]
         public async Task ManualHydrationLinq()
         {
-            var parser = new ManualContactHydrator(new DefaultRawStringParser(), MockHelper.InstanceDb());
+            var parser = new ManualContactHydrator(new DefaultRawStringParser(), DBInstance);
             for (int i = 0; i < N; i++)
             {
                 foreach (var data in GetBenchData())
@@ -96,7 +106,7 @@ namespace FastReslectionForHabrahabr
         [Benchmark]
         public async Task ManualHydration()
         {
-            var parser = new ManualContactHydrator(new DefaultRawStringParser(), MockHelper.InstanceDb());
+            var parser = new ManualContactHydrator(new DefaultRawStringParser(), DBInstance);
             for (int i = 0; i < N; i++)
             {
                 foreach (var data in GetBenchData())
