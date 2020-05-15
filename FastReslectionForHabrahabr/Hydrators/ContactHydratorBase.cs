@@ -16,13 +16,13 @@ namespace FastReslectionForHabrahabr.Hydrators
     {
         private readonly IRawStringParser _normalizer;
         private readonly IStorage _db;
-        protected static readonly string _typeName;
+        protected static readonly string _typeNameInUpperCaseInvariant;
         protected static readonly IEnumerable<ContactMapSchema> _mapSchemas = MockHelper.GetFakeData();
 
         static ContactHydratorBase()
         {
             var type = typeof(Contact);
-            _typeName = type.FullName;
+            _typeNameInUpperCaseInvariant = type.FullName.ToUpperInvariant();
         }
 
         public ContactHydratorBase(IRawStringParser normalizer, IStorage db)
@@ -44,7 +44,7 @@ namespace FastReslectionForHabrahabr.Hydrators
             var mapSchemas = _mapSchemas.ToArray();
             foreach (var item in mapSchemas)
             {
-                if (!item.EntityName.Equals(_typeName, StringComparison.InvariantCultureIgnoreCase))
+                if (item.EntityName.ToUpperInvariant() != _typeNameInUpperCaseInvariant)
                     continue;
 
                 foreach(var pair in mailPairs)
@@ -65,7 +65,7 @@ namespace FastReslectionForHabrahabr.Hydrators
             var mailPairs = _normalizer.ParseWithLinq(rawData: rawData, pairDelimiter: Environment.NewLine);
             var mapSchemas = 
                 _mapSchemas
-                .Where(x => x.EntityName.ToUpperInvariant() == _typeName.ToUpperInvariant())
+                .Where(x => x.EntityName.ToUpperInvariant() == _typeNameInUpperCaseInvariant)
                 .Select(x => new { x.Key, x.Property })
                 .ToArray();
 
